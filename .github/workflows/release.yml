@@ -256,7 +256,7 @@ jobs:
         id: git-info
         run: echo "SHORT_COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      - name: "Packaging WCP file for Winlator"
+      - name: "Packaging WCP file for PluviaGoldberg"
         if: matrix.platform == 'ANDROID_GLIBC' && matrix.type != 'StaticBuild'
         run: |
           cd build
@@ -274,7 +274,7 @@ jobs:
             ]
           }
           EOF
-          patchelf --set-interpreter /data/data/com.winlator/files/imagefs/usr/lib/ld-linux-aarch64.so.1 ./box64
+          patchelf --set-interpreter /data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/ld-linux-aarch64.so.1 ./box64
           tar --zstd -cf box64-latest.wcp box64 profile.json
 
       - name: "Upload Artifact"
