@@ -1626,20 +1626,29 @@ void LoadLDPath(box64context_t *context)
             AddPath("/data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/box64-i386-linux-gnu", &context->box64_ld_lib, 1);
         #endif
     } else {
-        if(FileExist("/lib/x86_64-linux-gnu", 0))
-            AddPath("/lib/x86_64-linux-gnu", &context->box64_ld_lib, 1);
-        if(FileExist("/usr/lib/x86_64-linux-gnu", 0))
-            AddPath("/usr/lib/x86_64-linux-gnu", &context->box64_ld_lib, 1);
-        if(FileExist("/usr/x86_64-linux-gnu/lib", 0))
-            AddPath("/usr/x86_64-linux-gnu/lib", &context->box64_ld_lib, 1);
-        if(FileExist("/usr/lib/box64-x86_64-linux-gnu", 0))
-            AddPath("/usr/lib/box64-x86_64-linux-gnu", &context->box64_ld_lib, 1);
-        if(FileExist("/data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/x86_64-linux-gnu", 0))
-            AddPath("/data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/x86_64-linux-gnu", &context->box64_ld_lib, 1);
-        if(FileExist("/data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/box64-x86_64-linux-gnu", 0))
-            AddPath("/data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/box64-x86_64-linux-gnu", &context->box64_ld_lib, 1);
-        if(FileExist("/data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/box64-x86_64-linux-gnu", 0))
-            AddPath("/data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/box64-x86_64-linux-gnu", &context->box64_ld_lib, 1);
+        if(!FileExist("/lib/x86_64-linux-gnu", 0))
+            printf_log(LOG_INFO, "BOX64‑LD: /lib/x86_64-linux-gnu – %s\n", strerror(errno));
+        AddPath("/lib/x86_64-linux-gnu", &context->box64_ld_lib, 1);
+
+        if(!FileExist("/usr/lib/x86_64-linux-gnu", 0))
+            printf_log(LOG_INFO, "BOX64‑LD: /usr/lib/x86_64-linux-gnu – %s\n", strerror(errno));
+        AddPath("/usr/lib/x86_64-linux-gnu", &context->box64_ld_lib, 1);
+
+        if(!FileExist("/usr/x86_64-linux-gnu/lib", 0))
+            printf_log(LOG_INFO, "BOX64‑LD: /usr/x86_64-linux-gnu/lib – %s\n", strerror(errno));
+        AddPath("/usr/x86_64-linux-gnu/lib", &context->box64_ld_lib, 1);
+
+        if(!FileExist("/usr/lib/box64-x86_64-linux-gnu", 0))
+            printf_log(LOG_INFO, "BOX64‑LD: /usr/lib/box64-x86_64-linux-gnu – %s\n", strerror(errno));
+        AddPath("/usr/lib/box64-x86_64-linux-gnu", &context->box64_ld_lib, 1);
+
+        if(!FileExist("/data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/x86_64-linux-gnu", 0))
+            printf_log(LOG_INFO, "BOX64‑LD: /data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/x86_64-linux-gnu – %s\n", strerror(errno));
+        AddPath("/data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/x86_64-linux-gnu", &context->box64_ld_lib, 1);
+
+        if(!FileExist("/data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/box64-x86_64-linux-gnu", 0))
+            printf_log(LOG_INFO, "BOX64‑LD: /data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/box64-x86_64-linux-gnu – %s\n", strerror(errno));
+        AddPath("/data/data/com.utkarshdalal.PluviaGoldberg/files/imagefs/usr/lib/box64-x86_64-linux-gnu", &context->box64_ld_lib, 1);
     }
     #else
     //TODO: Add Termux Library Path - Lily
