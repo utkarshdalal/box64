@@ -2069,6 +2069,7 @@ int initialize(int argc, const char **argv, char** env, x64emu_t** emulator, elf
 
     // check BOX64_LD_LIBRARY_PATH and load it
     LoadEnvVars(my_context);
+    LoadLDPath(my_context);
     // Append ld_list if it exist
     if(ld_libs_args!=-1)
         PrependList(&my_context->box64_ld_lib, argv[ld_libs_args], 1);
@@ -2297,9 +2298,6 @@ int initialize(int argc, const char **argv, char** env, x64emu_t** emulator, elf
         init_pthread_helper_32();
     }
     #endif
-    LoadLDPath(my_context);
-    PrintCollection(&my_context->box64_ld_lib, "BOX64 LIB PATH after LoadLDPath");
-    PrintCollection(&my_context->box64_path, "BOX64 BIN PATH");
     elfheader_t *elf_header = LoadAndCheckElfHeader(f, my_context->fullpath, 1);
     if(!elf_header) {
         int x86 = my_context->box86path?FileIsX86ELF(my_context->fullpath):0;
